@@ -1,0 +1,9 @@
+---
+applications:
+- name: myapp
+  memory: 32MB
+  domain: mybluemix.net
+  instances: 1
+  host: myapp
+  path: .
+  buildpack: https://github.com/cloudfoundry/buildpack-go.git
