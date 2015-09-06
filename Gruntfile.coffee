@@ -8,9 +8,9 @@ module.exports = (grunt) ->
     coffee:
       app:
         expand: true
-        cwd: 'static/script'
+        cwd: 'source/script'
         src: ['**/**.coffee']
-        dest: '.tmp/script/src'
+        dest: 'static/script/src'
         ext: '.js'
 
     sass:
@@ -20,24 +20,12 @@ module.exports = (grunt) ->
         files: [
           {
             expand: true
-            cwd: "static/style"
+            cwd: "source/style"
             src: ["app.scss"]
-            dest: ".tmp/style"
+            dest: "static/style"
             ext: ".css"
           }
         ]
-
-    copy:
-      static:
-        cwd: "static/html"
-        src: "**/*"
-        dest: ".tmp"
-        expand: true
-      translation:
-        cwd: "static/translation"
-        src: "**/*"
-        dest: ".tmp/translation"
-        expand: true
 
     uglify:
       platform:
@@ -45,31 +33,28 @@ module.exports = (grunt) ->
           beautify: true
           mangle: false
         files:
-          '.tmp/script/app.min.js': [
-            '.tmp/script/src/app.js'
-            '.tmp/script/src/service/*.js'
-            '.tmp/script/src/directive/*.js'
-            '.tmp/script/src/controller/*.js'
+          'static/script/app.min.js': [
+            'static/script/src/app.js'
+            'static/script/src/service/*.js'
+            'static/script/src/directive/*.js'
+            'static/script/src/controller/*.js'
           ]
 
     bower:
       install: {}
       options:
-        targetDir: ".tmp/bower_components"
+        targetDir: "static/bower_components"
 
     watch:
       coffee:
-        files: 'static/script/**'
+        files: 'source/script/**'
         tasks: ['coffee', 'uglify']
       less:
-        files: 'static/style/**'
+        files: 'souce/style/**'
         tasks: ['sass']
-      copy:
-        files: "static/html/**"
-        tasks: ["copy:static"]
-      translation:
-        files: "static/translation/**"
-        tasks: ["copy:translation"]
+      bower:
+        files: 'bower.json'
+        tasks: ['bower']
 
   # These plugins provide necessary tasks.
   grunt.loadNpmTasks 'grunt-contrib-coffee'
@@ -80,4 +65,4 @@ module.exports = (grunt) ->
   grunt.loadNpmTasks 'grunt-bower-task'
 
   # Default task.
-  grunt.registerTask 'default', ['coffee', 'sass', 'uglify', 'copy', 'bower']
+  grunt.registerTask 'default', ['coffee', 'sass', 'uglify', 'bower']

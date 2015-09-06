@@ -16,7 +16,7 @@ func main() {
 // route will establish routes
 func route(e *echo.Echo) {
 
-	e.Static("/", ".tmp")
+	e.Static("/", "static")
 
 	//api := e.Group("/api")
 }
