@@ -50,7 +50,7 @@ module.exports = (grunt) ->
         files: 'source/script/**'
         tasks: ['coffee', 'uglify']
       less:
-        files: 'souce/style/**'
+        files: 'source/style/**'
         tasks: ['sass']
       bower:
         files: 'bower.json'
