@@ -4,3 +4,4 @@ node_modules/
 static/bower_components/
 static/script
 static/style
+.idea/
