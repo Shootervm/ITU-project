@@ -1,5 +1,5 @@
 
-angular.module("app", ["ui.router", "ngMaterial", "pascalprecht.translate"])
+angular.module("app", ["ui.router", "ngMaterial", "pascalprecht.translate", "ngSanitize"])
   .config ($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) ->
 
     $urlRouterProvider.otherwise("")
