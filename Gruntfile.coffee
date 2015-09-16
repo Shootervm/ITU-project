@@ -35,9 +35,9 @@ module.exports = (grunt) ->
         files:
           'static/script/app.min.js': [
             'static/script/src/app.js'
-            'static/script/src/service/*.js'
-            'static/script/src/directive/*.js'
-            'static/script/src/controller/*.js'
+            'static/script/src/service/**/*.js'
+            'static/script/src/directive/**/*.js'
+            'static/script/src/controller/**/*.js'
           ]
 
     bower:
