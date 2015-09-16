@@ -19,5 +19,5 @@ angular.module("app", ["ui.router", "ngMaterial", "pascalprecht.translate", "ngS
       prefix: "/translation/",
       suffix: ".json"
     }
-    $translateProvider.preferredLanguage('cz')
+    $translateProvider.preferredLanguage('en')
     $translateProvider.useSanitizeValueStrategy(null)
