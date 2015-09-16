@@ -1,6 +1,10 @@
 package main
 
-import "github.com/labstack/echo"
+import (
+	"fmt"
+	
+	"github.com/labstack/echo"
+	)
 
 func main() {
 	// environment
@@ -9,6 +13,8 @@ func main() {
 
 	e := echo.New()
 	route(e)
+
+	fmt.Println("Starting server on http://" + bind + ":" + port + "/")
 
 	e.Run(bind + ":" + port)
 }
