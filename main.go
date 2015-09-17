@@ -2,14 +2,25 @@ package main
 
 import (
 	"fmt"
-	
+	"os"
+
 	"github.com/labstack/echo"
+
+	"github.com/gelidus/mcl-platform/app/env/dev"
 	)
 
 func main() {
-	// environment
-	port := "8888"
-	bind := "0.0.0.0"
+	port := dev.Port
+	bind := dev.Bind
+
+	// retrieve specific port
+	if eport := os.Getenv("port"); eport != "" {
+		port = eport
+	}
+	// retrieve specific bind address
+	if ebind := os.Getenv("bind"); ebind != "" {
+		bind = ebind
+	}
 
 	e := echo.New()
 	route(e)
