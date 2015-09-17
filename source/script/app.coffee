@@ -1,6 +1,6 @@
 
-angular.module("app", ["ui.router", "ngMaterial"])
-  .config ($stateProvider, $urlRouterProvider, $mdThemingProvider) ->
+angular.module("app", ["ui.router", "ngMaterial", "pascalprecht.translate", "ngSanitize"])
+  .config ($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) ->
 
     $urlRouterProvider.otherwise("")
 
@@ -14,3 +14,10 @@ angular.module("app", ["ui.router", "ngMaterial"])
         #templateUrl: ""
         #controller: ""
       }
+
+    $translateProvider.useStaticFilesLoader {
+      prefix: "/translation/",
+      suffix: ".json"
+    }
+    $translateProvider.preferredLanguage('en')
+    $translateProvider.useSanitizeValueStrategy(null)
