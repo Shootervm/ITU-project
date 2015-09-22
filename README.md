@@ -1,44 +1,35 @@
-============
-Material APP
-============
+# Material APP
 
-Is an template aplication witch preprepared components for an easy to use and quick new Golang/Angular/Material web app structure.
+Is a template application with prepared components for an easy to use and quick new Golang/Angular/Material web.
 
-Requirements
-============
+## Requirements
 
-To start using this app you'll need to prepare you're enviroment.
-Required is to have:
-* NPM (nodeJS pacage manager) - will provide all of other more complex dependencies
-* Golang (GO language) 
+* [Node.js and npm](nodejs.org)
+* [Golang](golang.org)
+* [Bower](bower.io)
 
-Usage
-=====
+## Creating the app
 
-To get project use `go get github.com/flowup/material-app` or `git clone git@github.com:flowup/material-app.git`
+Clone the repo:
+`git clone git@github.com:flowup/material-app.git myApp`
 
-#### When running app for first time:
+Install golang dependencies:
+`go get ./...`
 
+Install npm dependencies(grunt)
+`npm install`
 
-`go get ./...` 
- * will find and get all external Go dependencies
-`npm install` 
- * will resolve and install all external dependencies of aplication like *grunt* or *bower* (may take a while to finish)
-
-#### If all dependencies were installed you can start using app like:
+## Writing the app
 
 `grunt`
- * performs all necessary operations to set up everything
-   - compiles the scss and coffee script
-   - runs bower install and prepare all the components
-   - uglify the scripts and css
+- performs all necessary setup operations (just once)
+  - compiles the scss and coffee script files
+  - runs bower to install all required dependencies
 
 `grunt watch`
-* run if there is a need to constantly recompile CSS of Coffee script run after all changes
+- recompiles the sources each time coffee or scss is changed(and saved)
 
-#### Starting server:
+## Starting the server:
 
-`go run main.go` 
- * will start a server on default address and port
- * if you need to change a port or an address you can do it using enviroment variables
-   - for example `port=1337 go run main.go` or `address=127.0.0.1 port=8080 go run main.go`
+Start a server on default address and port:
+`go run main.go`
