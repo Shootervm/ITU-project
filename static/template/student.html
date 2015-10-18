@@ -1,0 +1,70 @@
+<div layout="row">
+  <div flex-gt-sm="50">
+    <md-card>
+      <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="Mé konzultace">
+          <md-list>
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.consultations">
+              <div class="md-list-item-text">
+                <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
+                <p>[{{consultation.time}}] @{{consultation.place}}</p>
+              </div>
+              <md-divider></md-divider>
+            </md-list-item>
+          </md-list>
+        </md-tab>
+
+        <md-tab label="Přihlášení konzultace">
+          <md-list>
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.available">
+              <div class="md-list-item-text">
+                <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
+                <p>[{{consultation.time}}] @{{consultation.place}}</p>
+              </div>
+              <md-divider></md-divider>
+            </md-list-item>
+          </md-list>
+        </md-tab>
+      </md-tabs>
+    </md-card>
+  </div>
+  <div flex-gt-sm="50">
+    <md-card>
+      <md-subheader>Informace o konzultaci</md-subheader>
+      <md-card-content>
+        <md-subheader ng-hide="student.current">Nebyla vybrána žádna konzultace</md-subheader>
+        <consultation ng-hide="!student.current">
+          <h2 class="md-title">{{student.current.name}} <md-icon ng-hide="!student.current.registered">done</md-icon></h2>
+          <md-subheader>
+            <span><md-icon>person_pin</md-icon> {{student.current.consultant}}</span> &nbsp;
+            <span><md-icon>pin_drop</md-icon> {{student.current.place}}</span> &nbsp;
+            <span><md-icon>access_time</md-icon> {{student.current.time}}</span> &nbsp;
+            <span ng-hide="student.current.registered"><md-icon>event_available</md-icon> 2/3</span>
+          </md-subheader>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut ipsum sollicitudin, commodo lorem nec, tempus arcu. Quisque a ligula a velit vulputate iaculis a at purus. Phasellus enim neque, cursus id ante quis, convallis faucibus sapien. Pellentesque nibh felis, tempus quis tortor quis, blandit laoreet nisi. Aliquam hendrerit malesuada urna vitae convallis. In sagittis nec nisl eget porta. Nullam dignissim rhoncus nisl, quis tristique felis varius a.
+          </p>
+
+          <md-list>
+            <md-list-item class="md-2-line">
+              <img class="md-avatar" src="/img/someone.jpg" alt="">
+              <div class="md-list-item-text">
+                <h3>Jméno konzultanta</h3>
+                <p>Nejaká správa pro studenty</p>
+              </div>
+            </md-list-item>
+          </md-list>
+
+          <div class="md-actions" layout="row" layout-align="end center">
+            <md-button class="md-raised md-primary" ng-hide="!student.current.registered">
+              <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
+            </md-button>
+            <md-button class="md-raised md-primary" ng-hide="student.current.registered">
+              <md-icon>done</md-icon>&nbsp;Přihlásit konzultaci
+            </md-button>
+          </div>
+        </consultation>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

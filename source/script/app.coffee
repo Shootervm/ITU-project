@@ -2,17 +2,18 @@
 angular.module("app", ["ui.router", "ngMaterial", "pascalprecht.translate", "ngSanitize"])
   .config ($stateProvider, $urlRouterProvider, $mdThemingProvider, $translateProvider) ->
 
-    $urlRouterProvider.otherwise("")
-
-    #$mdThemingProvider.theme("default")
-    #  .primaryPalette("")
-    #  .accentPalette("")
+    $urlRouterProvider.otherwise("/student")
 
     $stateProvider
-      .state "index", {
-        url: "/"
-        #templateUrl: ""
-        #controller: ""
+      .state "student", {
+        url: "/student"
+        templateUrl: "template/student.html"
+        controller: "StudentController as student"
+      }
+      .state "consultant", {
+        url: "/consultant"
+        templateUrl: "template/consultant.html"
+        controller: "ConsultantController as consultant"
       }
 
     $translateProvider.useStaticFilesLoader {
