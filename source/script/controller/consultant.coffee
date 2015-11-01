@@ -2,6 +2,7 @@
 angular.module("app").controller "ConsultantController", ["$scope", class
   constructor: (@$scope) ->
     @edit = false
+    @new = false
     @desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut ipsum sollicitudin, commodo lorem nec, tempus arcu. Quisque a ligula a velit vulputate iaculis a at purus. Phasellus enim neque, cursus id ante quis, convallis faucibus sapien. Pellentesque nibh felis, tempus quis tortor quis, blandit laoreet nisi. Aliquam hendrerit malesuada urna vitae convallis. In sagittis nec nisl eget porta. Nullam dignissim rhoncus nisl, quis tristique felis varius a."
     # consultations created by the consultant (me)
     @consultations = [
@@ -83,7 +84,15 @@ angular.module("app").controller "ConsultantController", ["$scope", class
     return null
 
   showConsultation: (id) ->
+    @new = @edit = false
     @current = @findConsultation(id)
+
+  addConsultation: () ->
+    @edit = false
+    @current = null
+
+    @new = true
+
 
   # Performs search in all student registered to consultation and sets their information
   findPerson: (pid) ->
