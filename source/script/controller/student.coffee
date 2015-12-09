@@ -12,9 +12,11 @@ angular.module("app").controller "StudentController", ["$scope", "Consultations"
     @current = @cons.findConsultation(id)
 
   registerConsultation: (id) ->
+    @current.actual = @current.actual + 1
     @cons.registerConsultation(id)
 
   unregisterConsultation: (id) ->
+    @current.actual = @current.actual - 1
     @cons.unregisterConsultation(id)
 
 ]

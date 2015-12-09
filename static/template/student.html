@@ -44,8 +44,7 @@
             <span><md-icon>pin_drop</md-icon> {{student.current.place}}</span> &nbsp;
             <span><md-icon>date_range</md-icon> {{student.current.date | date:'dd.MM.yyyy'}}</span> &nbsp;
             <span><md-icon>access_time</md-icon> {{student.current.date | date:'hh:mm'}}</span> &nbsp;
-            <span ng-hide="student.current.registered"><md-icon>people
-            </md-icon>{{student.current.actual || 0}}/{{student.current.max}}</span>
+            <span><md-icon>people</md-icon>{{student.current.actual || 0}}/{{student.current.max}}</span>
           </md-subheader>
           <p>{{student.current.desc}}</p>
           <md-list flex>
