@@ -7,7 +7,7 @@ angular.module("app")
         "[ITU] Konzultace k projektu"
         "[ITU] Konzultace k pulsemestralni skousce"
         "[ITU] Konzultace ke konzultaci"
-        "[ISA] Konzultace k laborarorim"
+        "[ISA] Konzultace k laborarnim cvicenim"
         "[ISA] Skupinove reseni uloh k projektum"
         "[ISA] Vanocni konzultace"
         "[IAL] Projekty"

@@ -5,7 +5,8 @@
         <md-tab label="Mé konzultace">
           <md-subheader ng-hide="student.cons.registered.length != 0">Nemáte registrovanú žádnou konzultaci</md-subheader>
           <md-list>
-            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.registered">
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)"
+                          ng-repeat="consultation in student.cons.registered">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
                 <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm'}}] @{{consultation.place}}</p>
@@ -15,9 +16,10 @@
           </md-list>
         </md-tab>
 
-        <md-tab label="Přihlášení konzultace">
+        <md-tab label="Volné konzultace">
           <md-list>
-            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.available">
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)"
+                          ng-repeat="consultation in student.cons.available">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
                 <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm'}}] @{{consultation.place}}</p>
@@ -35,33 +37,49 @@
       <md-card-content>
         <md-subheader ng-hide="student.current">Nebyla vybrána žádna konzultace</md-subheader>
         <consultation ng-hide="!student.current">
-          <h2 class="md-title">{{student.current.name}} <md-icon ng-hide="!student.current.registered">done</md-icon></h2>
+          <h2 class="md-title">{{student.current.name}}
+            <md-icon ng-hide="!student.current.registered">done</md-icon>
+          </h2>
           <md-subheader>
-            <span><md-icon>person_pin</md-icon> {{student.current.consultant}}</span> &nbsp;
             <span><md-icon>pin_drop</md-icon> {{student.current.place}}</span> &nbsp;
-            <span><md-icon>access_time</md-icon> {{student.current.date | date:'yyyy-MM-dd HH:mm'}}</span> &nbsp;
-            <span ng-hide="student.current.registered"><md-icon>event_available</md-icon> 2/3</span>
+            <span><md-icon>date_range</md-icon> {{student.current.date | date:'dd.MM.yyyy'}}</span> &nbsp;
+            <span><md-icon>access_time</md-icon> {{student.current.date | date:'hh:mm'}}</span> &nbsp;
+            <span ng-hide="student.current.registered"><md-icon>people
+            </md-icon>{{student.current.actual || 0}}/{{student.current.max}}</span>
           </md-subheader>
-          <p>
-            {{student.current.desc}}
-          </p>
-
-          <md-list>
-            <md-list-item class="md-2-line">
+          <p>{{student.current.desc}}</p>
+          <md-list flex>
+            <md-list-item class="md-2-line" ng-repeat="comment in student.current.comments">
               <img class="md-avatar" src="/img/someone.jpg" alt="">
+
               <div class="md-list-item-text">
-                <h3>Jméno konzultanta</h3>
-                <p>Nejaká správa pro studenty</p>
+                <h3>{{comment.message}}</h3>
+
+                <p>{{comment.date | date:'dd.MM.yy hh:mm:ss'}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
+          <md-list>
+            <h3>Přihlášení lidi:</h3>
+            <p ng-hide="student.current.registered">Zatim nikdo</p>
+            <p ng-show="student.current.registered">xjmeno00 - Jmeno Studenta</p>
+            <md-list-item ng-repeat="person in student.current.people" class="md-1-line">
+              <div class="md-list-item-text">
+                <p>{{person.login}} - {{person.name}} {{person.surname}}</p>
               </div>
             </md-list-item>
           </md-list>
 
           <div class="md-actions" layout="row" layout-align="end center">
-            <md-button ng-click="student.unregisterConsultation(student.current.id)" class="md-raised md-primary" ng-hide="!student.current.registered">
-              <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
+            <md-button ng-click="student.unregisterConsultation(student.current.id)" class="md-raised md-primary"
+                       ng-hide="!student.current.registered">
+              <md-icon>cancel</md-icon>
+              &nbsp;Zrušit konzultaci
             </md-button>
-            <md-button ng-click="student.registerConsultation(student.current.id)" class="md-raised md-primary" ng-hide="student.current.registered">
-              <md-icon>done</md-icon>&nbsp;Přihlásit konzultaci
+            <md-button ng-click="student.registerConsultation(student.current.id)" class="md-raised md-primary"
+                       ng-hide="student.current.registered">
+              <md-icon>done</md-icon>
+              &nbsp;Přihlásit konzultaci
             </md-button>
           </div>
         </consultation>
