@@ -19,9 +19,8 @@ angular.module("app").controller "ConsultantController", ["$scope", "Consultatio
 
   addConsultation: () ->
     @edit = true
-    @current = null
     @new = true
-
+    @current = null
 
   # Performs search in all student registered to consultation and sets their information
   findPerson: (pid) ->
@@ -35,4 +34,7 @@ angular.module("app").controller "ConsultantController", ["$scope", "Consultatio
 
   switchEdit: ->
     @edit = !@edit
+    if @new
+      @cons.newConsultation(@current)
+      @new = false
 ]

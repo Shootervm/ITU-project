@@ -4,9 +4,11 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Mé konzultace">
           <md-list>
-            <md-list-item class="md-2-line" ng-click="consultant.showConsultation(consultation.id)" ng-repeat="consultation in consultant.cons.available">
+            <md-list-item class="md-2-line" ng-click="consultant.showConsultation(consultation.id)"
+                          ng-repeat="consultation in consultant.cons.available">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
+
                 <p>[{{consultation.time}}] @{{consultation.place}}</p>
               </div>
               <md-divider></md-divider>
@@ -56,17 +58,19 @@
 
             <div class="md-actions" layout="row" layout-align="end center">
               <md-button class="md-raised md-warn">
-                <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
+                <md-icon>cancel</md-icon>
+                &nbsp;Zrušit konzultaci
               </md-button>
               <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
-                <md-icon>create</md-icon>&nbsp;Editovat konzultaci
+                <md-icon>create</md-icon>
+                &nbsp;Editovat konzultaci
               </md-button>
             </div>
           </div>
         </consultation>
 
         <consultation ng-show="consultant.edit || consultant.new">
-          <div layout="column">
+          <form layout="column">
             <md-input-container>
               <label>Název</label>
               <input ng-model="consultant.current.name" type="text">
@@ -76,35 +80,36 @@
               <md-input-container class="md-icon-float">
                 <label>Místo</label>
                 <md-icon>pin_drop</md-icon>
-                <input ng-model="consultant.current.place" type="text">
-              </md-input-container>
-              <md-input-container class="md-icon-float">
+                <input ng-model="consultant.current.place" type="text" required>
+              </md-input-container required>
+              <md-input-container class="md-icon-float" required>
                 <label>Datum</label>
                 <md-icon>date_range</md-icon>
-                <input ng-model="consultant.current.date" type="date">
+                <input ng-model="consultant.current.date" type="date" required>
               </md-input-container>
               <md-input-container class="md-icon-float">
                 <label>Čas</label>
                 <md-icon>access_time</md-icon>
-                <input ng-model="consultant.current.date" type="time">
+                <input ng-model="consultant.current.date" type="time" required>
               </md-input-container>
               <md-input-container class="md-icon-float">
                 <label>Maximum osob</label>
                 <md-icon>people</md-icon>
-                <input ng-model="consultant.current.max" type="number">
+                <input ng-model="consultant.current.max" type="number" required>
               </md-input-container>
             </div>
 
             <md-input-container flex>
               <label>Popis</label>
-              <textarea ng-model="consultant.current.desc" md-maxlength="1500"></textarea>
+              <textarea ng-model="consultant.current.desc" md-maxlength="1500" minlength="3" required></textarea>
             </md-input-container>
-          </div>
-          <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
-              <md-icon>create</md-icon>&nbsp;Publikovat konzultaci
-            </md-button>
-          </div>
+            <div class="md-actions" layout="row" layout-align="end center">
+              <md-button type="submit" class="md-raised md-primary" ng-click="consultant.switchEdit()">
+                <md-icon>create</md-icon>
+                &nbsp;Publikovat konzultaci
+              </md-button>
+            </div>
+          </form>
         </consultation>
       </md-card-content>
     </md-card>
