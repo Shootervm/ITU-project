@@ -25,61 +25,36 @@
       <md-subheader>Informace o konzultaci</md-subheader>
       <md-card-content>
         <md-subheader ng-hide="consultant.current||consultant.new">Nebyla vybrána žádna konzultace</md-subheader>
-        <consultation ng-show="consultant.new">
-          <md-input-container class="md-icon-float">
-            <label>Místo</label>
-            <md-icon>pin_drop</md-icon>
-            <input type="text">
-          </md-input-container>
-          <md-input-container class="md-icon-float">
-            <label>Čas</label>
-            <md-icon>access_time</md-icon>
-            <input type="text">
-          </md-input-container>
-
-          <md-input-container flex>
-            <label>Popis</label>
-            <textarea></textarea>
-          </md-input-container>
-
-          <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary">
-              <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
-            </md-button>
-            <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
-              <md-icon>create</md-icon>&nbsp;Publikovat konzultaci
-            </md-button>
-          </div>
-        </consultation>
-        <consultation ng-show="consultant.current && !consultant.edit">
+        <consultation ng-show="consultant.current">
           <h2 class="md-title">{{consultant.current.name}}</h2>
           <md-subheader>
             <span><md-icon>pin_drop</md-icon> {{consultant.current.place}}</span> &nbsp;
-            <span><md-icon>access_time</md-icon> {{consultant.current.time}}</span> &nbsp;
-            <span ng-hide="consultant.current.registered"><md-icon>event_available</md-icon> 2/3</span>
+            <span><md-icon>date_range</md-icon> {{consultant.current.date | date:'dd:MM:yyyy'}}</span> &nbsp;
+            <span><md-icon>access_time</md-icon> {{consultant.current.time | date:'hh:mm'}}</span> &nbsp;
+            <span ng-hide="consultant.current.registered"><md-icon>people</md-icon>{{consultant.current.actual || 0}}/{{consultant.current.max}}</span>
           </md-subheader>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut ipsum sollicitudin, commodo lorem nec, tempus arcu. Quisque a ligula a velit vulputate iaculis a at purus. Phasellus enim neque, cursus id ante quis, convallis faucibus sapien. Pellentesque nibh felis, tempus quis tortor quis, blandit laoreet nisi. Aliquam hendrerit malesuada urna vitae convallis. In sagittis nec nisl eget porta. Nullam dignissim rhoncus nisl, quis tristique felis varius a.
-          </p>
+          <p>{{consultant.current.desc}}</p>
 
-          <md-list>
-            <md-list-item class="md-2-line">
-              <img class="md-avatar" src="/img/someone.jpg" alt="">
-              <md-input-container flex>
-                <label>Krátka správa</label>
-                <textarea ng-model="consultant.message" columns="1" md-maxlength="350"></textarea>
-              </md-input-container>
-            </md-list-item>
-          </md-list>
+          <div ng-hide="consultant.edit">
+            <md-list>
+              <md-list-item class="md-2-line">
+                <img class="md-avatar" src="/img/someone.jpg" alt="">
+                <md-input-container flex>
+                  <label>Krátka správa</label>
+                  <textarea ng-model="consultant.message" columns="1" md-maxlength="350"></textarea>
+                </md-input-container>
+              </md-list-item>
+            </md-list>
 
-          <md-list>
-            <h2>Prihlášené lidi:</h2>
-            <md-list-item ng-repeat="person in consultant.current.people" class="md-1-line">
-              <div class="md-list-item-text">
-                <p>{{person.login}} - {{person.name}} {{person.surname}}</p>
-              </div>
-            </md-list-item>
-          </md-list>
+            <md-list>
+              <h2>Prihlášené lidi:</h2>
+              <md-list-item ng-repeat="person in consultant.current.people" class="md-1-line">
+                <div class="md-list-item-text">
+                  <p>{{person.login}} - {{person.name}} {{person.surname}}</p>
+                </div>
+              </md-list-item>
+            </md-list>
+          </div>
 
           <div class="md-actions" layout="row" layout-align="end center">
             <md-button class="md-raised md-warn">
@@ -90,27 +65,44 @@
             </md-button>
           </div>
         </consultation>
-        <consultation ng-show="consultant.edit">
-          <h2 class="md-title">{{consultant.current.name}}</h2>
 
-          <md-input-container class="md-icon-float">
-            <label>Místo</label>
-            <md-icon>pin_drop</md-icon>
-            <input ng-model="consultant.current.place" type="text">
-          </md-input-container>
-          <md-input-container class="md-icon-float">
-            <label>Čas</label>
-            <md-icon>access_time</md-icon>
-            <input ng-model="consultant.current.time" type="text">
-          </md-input-container>
+        <consultation ng-show="consultant.edit || consultant.new">
+          <div layout="column">
+            <md-input-container>
+              <label>Název</label>
+              <input ng-model="consultant.current.name" type="text">
+            </md-input-container>
 
-          <md-input-container flex>
-            <label>Popis</label>
-            <textarea ng-model="consultant.desc" md-maxlength="1500"></textarea>
-          </md-input-container>
+            <div layout="row" layout-align="start center">
+              <md-input-container class="md-icon-float">
+                <label>Místo</label>
+                <md-icon>pin_drop</md-icon>
+                <input ng-model="consultant.current.place" type="text">
+              </md-input-container>
+              <md-input-container class="md-icon-float">
+                <label>Datum</label>
+                <md-icon>date_range</md-icon>
+                <input ng-model="consultant.current.date" type="date">
+              </md-input-container>
+              <md-input-container class="md-icon-float">
+                <label>Čas</label>
+                <md-icon>access_time</md-icon>
+                <input ng-model="consultant.current.time" type="time">
+              </md-input-container>
+              <md-input-container class="md-icon-float">
+                <label>Maximum osob</label>
+                <md-icon>people</md-icon>
+                <input ng-model="consultant.current.max" type="number">
+              </md-input-container>
+            </div>
 
+            <md-input-container flex>
+              <label>Popis</label>
+              <textarea ng-model="consultant.current.desc" md-maxlength="1500"></textarea>
+            </md-input-container>
+          </div>
           <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary">
+            <md-button ng-show="consultant.edit" class="md-raised md-primary">
               <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
             </md-button>
             <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">

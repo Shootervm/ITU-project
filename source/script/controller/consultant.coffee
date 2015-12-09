@@ -1,17 +1,21 @@
 
 angular.module("app").controller "ConsultantController", ["$scope", class
   constructor: (@$scope) ->
+    @liveEdit = true
     @edit = false
     @new = false
-    @desc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut ipsum sollicitudin, commodo lorem nec, tempus arcu. Quisque a ligula a velit vulputate iaculis a at purus. Phasellus enim neque, cursus id ante quis, convallis faucibus sapien. Pellentesque nibh felis, tempus quis tortor quis, blandit laoreet nisi. Aliquam hendrerit malesuada urna vitae convallis. In sagittis nec nisl eget porta. Nullam dignissim rhoncus nisl, quis tristique felis varius a."
     # consultations created by the consultant (me)
     @consultations = [
       {
         id: 1
         name: "[ITU] Konzultace k projektum"
-        time: "10.10.2015 - 14:00"
+        time: ""
         place: "G202"
+        date: ""
         consultant: "Jmeno konzultanta"
+        max: 4
+        desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ut ipsum sollicitudin, commodo lorem nec, tempus arcu. Quisque a ligula a velit vulputate iaculis a at purus. Phasellus enim neque, cursus id ante quis, convallis faucibus sapien. Pellentesque nibh felis, tempus quis tortor quis, blandit laoreet nisi. Aliquam hendrerit malesuada urna vitae convallis. In sagittis nec nisl eget porta. Nullam dignissim rhoncus nisl, quis tristique felis varius a."
+        actual:2
         people: [
           {
             pid: 1
@@ -29,10 +33,14 @@ angular.module("app").controller "ConsultantController", ["$scope", class
       }
       {
         id: 2
+        desc: ""
         name: "[IZP] Konzultace k pulsemestralce"
-        time: "3.11.2015 - 15:00"
+        time: ""
+        date: ""
         place: "L301"
         consultant: "Jmeno konzultanta"
+        max: 4
+        actual:2
         people: [
           {
             pid: 1
@@ -56,10 +64,14 @@ angular.module("app").controller "ConsultantController", ["$scope", class
       }
       {
         id: 3
+        desc: ""
         name: "[IZG] Konzultace"
-        time: "4.11.2015 - 12:00"
+        time: ""
+        date: ""
         place: "D202"
         consultant: "Jmeno konzultanta"
+        max: 4
+        actual:2
         people: [
           {
             pid: 3
@@ -88,7 +100,7 @@ angular.module("app").controller "ConsultantController", ["$scope", class
     @current = @findConsultation(id)
 
   addConsultation: () ->
-    @edit = false
+    @edit = true
     @current = null
 
     @new = true
