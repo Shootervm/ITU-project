@@ -4,7 +4,7 @@
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Mé konzultace">
           <md-list>
-            <md-list-item class="md-2-line" ng-click="consultant.showConsultation(consultation.id)" ng-repeat="consultation in consultant.consultations">
+            <md-list-item class="md-2-line" ng-click="consultant.showConsultation(consultation.id)" ng-repeat="consultation in consultant.cons.available">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
                 <p>[{{consultation.time}}] @{{consultation.place}}</p>
@@ -25,12 +25,12 @@
       <md-subheader>Informace o konzultaci</md-subheader>
       <md-card-content>
         <md-subheader ng-hide="consultant.current||consultant.new">Nebyla vybrána žádna konzultace</md-subheader>
-        <consultation ng-show="consultant.current">
+        <consultation ng-hide="!consultant.current || (!consultant.liveEdit && consultant.edit)">
           <h2 class="md-title">{{consultant.current.name}}</h2>
           <md-subheader>
             <span><md-icon>pin_drop</md-icon> {{consultant.current.place}}</span> &nbsp;
-            <span><md-icon>date_range</md-icon> {{consultant.current.date | date:'dd:MM:yyyy'}}</span> &nbsp;
-            <span><md-icon>access_time</md-icon> {{consultant.current.time | date:'hh:mm'}}</span> &nbsp;
+            <span><md-icon>date_range</md-icon> {{consultant.current.date | date:'dd.MM.yyyy'}}</span> &nbsp;
+            <span><md-icon>access_time</md-icon> {{consultant.current.date | date:'hh:mm'}}</span> &nbsp;
             <span ng-hide="consultant.current.registered"><md-icon>people</md-icon>{{consultant.current.actual || 0}}/{{consultant.current.max}}</span>
           </md-subheader>
           <p>{{consultant.current.desc}}</p>
@@ -45,24 +45,23 @@
                 </md-input-container>
               </md-list-item>
             </md-list>
-
             <md-list>
-              <h2>Prihlášené lidi:</h2>
+              <h2>Přihlášení lidi:</h2>
               <md-list-item ng-repeat="person in consultant.current.people" class="md-1-line">
                 <div class="md-list-item-text">
                   <p>{{person.login}} - {{person.name}} {{person.surname}}</p>
                 </div>
               </md-list-item>
             </md-list>
-          </div>
 
-          <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-raised md-warn">
-              <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
-            </md-button>
-            <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
-              <md-icon>create</md-icon>&nbsp;Editovat konzultaci
-            </md-button>
+            <div class="md-actions" layout="row" layout-align="end center">
+              <md-button class="md-raised md-warn">
+                <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
+              </md-button>
+              <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
+                <md-icon>create</md-icon>&nbsp;Editovat konzultaci
+              </md-button>
+            </div>
           </div>
         </consultation>
 
@@ -87,7 +86,7 @@
               <md-input-container class="md-icon-float">
                 <label>Čas</label>
                 <md-icon>access_time</md-icon>
-                <input ng-model="consultant.current.time" type="time">
+                <input ng-model="consultant.current.date" type="time">
               </md-input-container>
               <md-input-container class="md-icon-float">
                 <label>Maximum osob</label>
@@ -102,9 +101,6 @@
             </md-input-container>
           </div>
           <div class="md-actions" layout="row" layout-align="end center">
-            <md-button ng-show="consultant.edit" class="md-raised md-primary">
-              <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
-            </md-button>
             <md-button class="md-raised md-primary" ng-click="consultant.switchEdit()">
               <md-icon>create</md-icon>&nbsp;Publikovat konzultaci
             </md-button>
