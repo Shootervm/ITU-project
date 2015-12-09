@@ -39,13 +39,44 @@
         </md-not-found>
       </md-autocomplete>
     </div>
-    <md-button class="md-icon-button">
-      <md-icon>notifications</md-icon>
-    </md-button>
-    <md-button>
-      <md-icon>person</md-icon>
-      {{ctrl.username}}
-    </md-button>
+    <md-menu>
+      <md-button class="md-icon-button" ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+        <md-icon>notifications</md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-content>
+          <md-list>
+            <md-list-item ng-repeat="i in [0,1,2,3]" class="md-2-line">
+              <md-icon>notifications</md-icon>
+              <div class="md-list-item-text">
+                <h3>Jmeno notifikace</h3>
+                <p>Zprava o tom ze se neco stalo</p>
+              </div>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-menu-content>
+    </md-menu>
+    <md-menu>
+      <md-button ng-click="ctrl.openMenu($mdOpenMenu, $event)">
+        <md-icon md-menu-origin>person</md-icon>
+        {{ctrl.username}}
+      </md-button>
+      <md-menu-content>
+        <md-menu-item>
+          <md-button>
+            <md-icon>person</md-icon>
+            Profil
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button>
+            <md-icon>power_settings_new</md-icon>
+            Odhlásit se
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
   </div>
 </md-toolbar>
 <ui-view></ui-view>

@@ -26,4 +26,7 @@ angular.module("app").controller "PlatformController", ["$scope", "Randomizer", 
       state.value.indexOf(lowercaseQuery) == 0
 #****
 
+  openMenu: ($mdOpenMenu, $event) ->
+    $mdOpenMenu($event)
+
 ]
