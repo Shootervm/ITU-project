@@ -5,13 +5,11 @@ import (
 	"os"
 
 	"github.com/labstack/echo"
-
-	"github.com/gelidus/mcl-platform/app/env/dev"
-	)
+)
 
 func main() {
-	port := dev.Port
-	bind := dev.Bind
+	port := "80"
+	bind := ""
 
 	// retrieve specific port
 	if eport := os.Getenv("port"); eport != "" {
