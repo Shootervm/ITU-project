@@ -10,7 +10,9 @@ angular.module("app")
       return {
         id: @seq
         name: "Jmeno konzultace"
-        time: new Date()
+        max: 4
+        actual: 0
+        date: new Date()
         place: "misto"
         consultant: "Jmeno konzultanta"
         registered: false
