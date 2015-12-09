@@ -9,7 +9,7 @@
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
 
-                <p>[{{consultation.time}}] @{{consultation.place}}</p>
+                <p>[{{consultation.date | date:'dd.MM.yy hh:mm'}}] @{{consultation.place}}</p>
               </div>
               <md-divider></md-divider>
             </md-list-item>

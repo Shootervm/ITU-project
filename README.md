@@ -1,22 +1,17 @@
-# Material APP
-
-Is a template application with prepared components for an easy to use and quick new Golang/Angular/Material web.
+# ITU Project
 
 ## Requirements
 
 * [Node.js and npm](nodejs.org)
 * [Golang](golang.org)
 * [Bower](bower.io)
+* [Ruby]
+* [Gem]sass
 
 ## Creating the app
 
-Clone the repo:
-`git clone git@github.com:flowup/material-app.git myApp`
-
-Install golang dependencies:
-`go get ./...`
-
 Install npm dependencies(grunt)
+`npm install -g grunt grunt-cli`
 `npm install`
 
 ## Writing the app
