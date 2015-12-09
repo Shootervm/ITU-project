@@ -8,7 +8,7 @@
             <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.registered">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
-                <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm:ss'}}] @{{consultation.place}}</p>
+                <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm'}}] @{{consultation.place}}</p>
               </div>
               <md-divider></md-divider>
             </md-list-item>
@@ -20,7 +20,7 @@
             <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.available">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
-                <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm:ss'}}] @{{consultation.place}}</p>
+                <p>[{{consultation.date | date:'yyyy-MM-dd HH:mm'}}] @{{consultation.place}}</p>
               </div>
               <md-divider></md-divider>
             </md-list-item>
@@ -39,7 +39,7 @@
           <md-subheader>
             <span><md-icon>person_pin</md-icon> {{student.current.consultant}}</span> &nbsp;
             <span><md-icon>pin_drop</md-icon> {{student.current.place}}</span> &nbsp;
-            <span><md-icon>access_time</md-icon> {{student.current.date | date:'yyyy-MM-dd HH:mm:ss'}}</span> &nbsp;
+            <span><md-icon>access_time</md-icon> {{student.current.date | date:'yyyy-MM-dd HH:mm'}}</span> &nbsp;
             <span ng-hide="student.current.registered"><md-icon>event_available</md-icon> 2/3</span>
           </md-subheader>
           <p>
