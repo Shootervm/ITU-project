@@ -14,13 +14,13 @@
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
 
 </head>
-<body>
+<body ng-controller="PlatformController as ctrl">
 <md-toolbar>
   <div class="md-toolbar-tools">
     <h2>Konzultace</h2>
     <span flex></span>
 
-    <div ng-controller="PlatformController as ctrl">
+    <div>
       <md-autocomplete ng-required="true"
                        md-no-cache="true"
                        md-selected-item="ctrl.data.locality"
@@ -44,7 +44,7 @@
     </md-button>
     <md-button>
       <md-icon>person</md-icon>
-      Jmeno Uživatele
+      {{ctrl.username}}
     </md-button>
   </div>
 </md-toolbar>

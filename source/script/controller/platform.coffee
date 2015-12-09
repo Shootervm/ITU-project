@@ -4,6 +4,8 @@ angular.module("app").controller "PlatformController", ["$scope", "Randomizer", 
   constructor: (@$scope, @rand) ->
     @states = @loadAll()
 
+    @username = @rand.randomize(@rand.kConsultantNames)
+
 #**** Search and handle functions for locality of report
   querySearch: (query) ->
     if query then @states.filter(@createFilterFor(query)) else @states
