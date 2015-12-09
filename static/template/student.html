@@ -3,8 +3,9 @@
     <md-card>
       <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="Mé konzultace">
+          <md-subheader ng-hide="student.cons.registered.length != 0">Nemáte registrovanú žádnou konzultaci</md-subheader>
           <md-list>
-            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.consultations">
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.registered">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
                 <p>[{{consultation.time}}] @{{consultation.place}}</p>
@@ -16,7 +17,7 @@
 
         <md-tab label="Přihlášení konzultace">
           <md-list>
-            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.available">
+            <md-list-item class="md-2-line" ng-click="student.showConsultation(consultation.id)" ng-repeat="consultation in student.cons.available">
               <div class="md-list-item-text">
                 <h3>{{consultation.name}} - {{consultation.consultant}}</h3>
                 <p>[{{consultation.time}}] @{{consultation.place}}</p>
@@ -56,10 +57,10 @@
           </md-list>
 
           <div class="md-actions" layout="row" layout-align="end center">
-            <md-button class="md-raised md-primary" ng-hide="!student.current.registered">
+            <md-button ng-click="student.unregisterConsultation(student.current.id)" class="md-raised md-primary" ng-hide="!student.current.registered">
               <md-icon>cancel</md-icon>&nbsp;Zrušit konzultaci
             </md-button>
-            <md-button class="md-raised md-primary" ng-hide="student.current.registered">
+            <md-button ng-click="student.registerConsultation(student.current.id)" class="md-raised md-primary" ng-hide="student.current.registered">
               <md-icon>done</md-icon>&nbsp;Přihlásit konzultaci
             </md-button>
           </div>
