@@ -61,6 +61,7 @@ angular.module("app")
         place: @rand.randomize(@rand.kPlaces)
         consultant: @rand.randomize(@rand.kConsultantNames)
         registered: false
+        comments: []
       }
 
       return consultation
@@ -78,8 +79,8 @@ angular.module("app")
       for i in [0..n]
         @available.push(@gen.generate())
 
-    newConsultation: () =>
-      @available.push(@gen.generate())
+    newConsultation: (c) =>
+      @available.push(c)
 
     registerConsultation: (id) =>
       consultation = @findConsultation(id)
