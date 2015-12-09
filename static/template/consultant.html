@@ -38,17 +38,33 @@
           <p>{{consultant.current.desc}}</p>
 
           <div ng-hide="consultant.edit">
-            <md-list>
-              <md-list-item class="md-2-line">
+            <md-list flex>
+              <md-list-item class="md-2-line" ng-repeat="comment in consultant.current.comments">
                 <img class="md-avatar" src="/img/someone.jpg" alt="">
-                <md-input-container flex>
-                  <label>Krátka správa</label>
-                  <textarea ng-model="consultant.message" columns="1" md-maxlength="350"></textarea>
-                </md-input-container>
+                <div class="md-list-item-text"">
+                  <h3>{{comment.message}}</h3>
+                  <p>{{comment.date | date:'dd.MM.yy hh:mm:ss'}}</p>
+                </div>
               </md-list-item>
             </md-list>
+            <div layout="row" layout-align="center center">
+              <md-list flex>
+                <md-list-item class="md-2-line">
+                  <img class="md-avatar" src="/img/someone.jpg" alt="">
+                  <md-input-container flex>
+                    <label>Krátka správa</label>
+                    <textarea ng-model="consultant.message.message" columns="1" md-maxlength="350"></textarea>
+                  </md-input-container>
+                </md-list-item>
+              </md-list>
+              <md-button type="submit" class="md-raised md-primary" ng-click="consultant.addMessage()">
+                <md-icon>create</md-icon>
+                &nbsp;Odeslat
+              </md-button>
+            </div>
             <md-list>
-              <h2>Přihlášení lidi:</h2>
+              <h3>Přihlášení lidi:</h3>
+              <p ng-hide="consultant.current.registered">Zatim nikdo</p>
               <md-list-item ng-repeat="person in consultant.current.people" class="md-1-line">
                 <div class="md-list-item-text">
                   <p>{{person.login}} - {{person.name}} {{person.surname}}</p>
@@ -81,7 +97,7 @@
                 <label>Místo</label>
                 <md-icon>pin_drop</md-icon>
                 <input ng-model="consultant.current.place" type="text" required>
-              </md-input-container required>
+              </md-input-container>
               <md-input-container class="md-icon-float" required>
                 <label>Datum</label>
                 <md-icon>date_range</md-icon>

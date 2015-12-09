@@ -5,6 +5,8 @@ angular.module("app").controller "ConsultantController", ["$scope", "Consultatio
     @edit = false
     @new = false
 
+    # message that will be added to consultation
+    @message = {}
     # current displayed consultation
     @current = null
     # people registered to current consultation
@@ -37,4 +39,10 @@ angular.module("app").controller "ConsultantController", ["$scope", "Consultatio
     if @new
       @cons.newConsultation(@current)
       @new = false
+
+  addMessage: ->
+    @message.date = new Date()
+    @current.comments.push(@message)
+    @message = {}
+
 ]

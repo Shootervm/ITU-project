@@ -61,6 +61,7 @@ angular.module("app")
         place: @rand.randomize(@rand.kPlaces)
         consultant: @rand.randomize(@rand.kConsultantNames)
         registered: false
+        comments: []
       }
 
       return consultation
